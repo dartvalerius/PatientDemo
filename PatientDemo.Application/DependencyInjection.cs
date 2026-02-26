@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using PatientDemo.Application.Common.Behaviors;
+using PatientDemo.Application.Common.Mappings;
 
 namespace PatientDemo.Application;
 
@@ -18,7 +19,7 @@ public static class DependencyInjection
 
         services.AddAutoMapper(options =>
         {
-            
+            options.AddMaps(typeof(PatientMappingProfile));
         });
 
         services.AddMemoryCache();

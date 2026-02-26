@@ -8,8 +8,8 @@ namespace PatientDemo.Persistence.Parsers.Fhir.DateParser;
 
 public class FhirDateParser : IFhirDateParser
 {
-    private static readonly Regex PrefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap)");
-    private static readonly string[] DateFormats =
+    private readonly Regex PrefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap)");
+    private readonly string[] DateFormats =
     [
         "yyyy-MM-ddTHH:mm:ssZ",
         "yyyy-MM-ddTHH:mm:ss.fffZ",
@@ -74,7 +74,7 @@ public class FhirDateParser : IFhirDateParser
     /// <summary>
     /// Парсит один параметр date
     /// </summary>
-    private static FhirDateParameter ParseSingle(string input)
+    private FhirDateParameter ParseSingle(string input)
     {
         var result = new FhirDateParameter();
         var originalInput = input;

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using PatientDemo.Application.Interfaces;
 using PatientDemo.Persistence.Data;
+using PatientDemo.Persistence.Parsers.Fhir.DateParser;
 
 namespace PatientDemo.Persistence;
 
@@ -17,6 +18,7 @@ public static class DependencyInjection
         services.AddDbContext<PatientDemoDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DbConnection")));
 
         services.AddScoped<IPatientDemoDbContext, PatientDemoDbContext>();
+        services.AddScoped<IFhirDateParser, FhirDateParser>();
 
         return services;
     }

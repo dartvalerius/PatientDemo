@@ -14,5 +14,5 @@ public class GetPatientQuery : IRequest<PatientVm>, ICacheableQuery
     /// </summary>
     public Guid Id { get; set; }
 
-    public string CacheKey => $"{nameof(PatientVm)}-{Id}";
+    public string CacheKey => $"{nameof(PatientVm)}-{Id:N}";
 }

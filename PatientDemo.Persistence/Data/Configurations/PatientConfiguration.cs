@@ -18,7 +18,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder
             .HasOne(p => p.Name)
             .WithOne(hn => hn.Patient)
-            .HasForeignKey<HumanName>(hn => hn.PatientId);
+            .HasForeignKey<HumanName>(hn => hn.PatientId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
             .HasKey(x => x.Id);

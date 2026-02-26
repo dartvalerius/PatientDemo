@@ -23,7 +23,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Mappings\" />
+    <Compile Update="Handlers\Patients\Resources\PatientResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PatientResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Handlers\Patients\Resources\PatientResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PatientResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

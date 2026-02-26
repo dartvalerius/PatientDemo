@@ -6,7 +6,7 @@ namespace PatientDemo.Application.Handlers.Patients.Commands.CreatePatient;
 /// <summary>
 /// Команда создания пациента
 /// </summary>
-public class CreatePatientCommand : IRequest<string>
+public class CreatePatientCommand : IRequest<Guid>
 {
     /// <summary>
     /// Фамилия
