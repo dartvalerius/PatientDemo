@@ -1,7 +1,15 @@
 <Solution>
   <Folder Name="/src/" />
   <Folder Name="/src/Core/">
+    <Project Path="PatientDemo.Application/PatientDemo.Application.csproj" Id="70d37c33-797e-4945-adcf-dad59d162be0" />
     <Project Path="PatientDemo.Domain/PatientDemo.Domain.csproj" Id="5f5417a6-2415-47d3-b6d7-2bb7872681c0" />
+    <Project Path="PatientDemo.Shared/PatientDemo.Shared.csproj" Id="a008ead7-3cd9-4344-a956-c30e85bfb2d0" />
+  </Folder>
+  <Folder Name="/src/Infrastucture/">
+    <Project Path="PatientDemo.Persistence/PatientDemo.Persistence.csproj" Id="73ac36e4-9f34-44bd-a4ac-143cce926b6b" />
+  </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="PatientDemo.WebApi/PatientDemo.WebApi.csproj" Id="457c97d7-3e33-4770-a194-d1b37ba7dc6b" />
   </Folder>
   <Folder Name="/Элементы решения/">
     <File Path="docker-compose.yml" />

@@ -1,36 +1,41 @@
-﻿using PatientDemo.Domain.Enums;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
-namespace PatientDemo.Domain.Entities;
+namespace PatientDemo.Shared.DTO.Responses;
 
 /// <summary>
-/// Пациент
+/// Модель отображения данных пациента
 /// </summary>
-public class Patient
+public class PatientVm
 {
     /// <summary>
-    /// Идентификатор
+    /// Имя пациента
     /// </summary>
-    public Guid Id { get; set; }
+    [JsonPropertyOrder(0)]
+    [Description("Имя пациента")]
+    public HumanNameVm Name { get; set; } = null!;
 
     /// <summary>
     /// Пол
     /// </summary>
-    public Gender Gender { get; set; }
+    [JsonPropertyOrder(1)]
+    [Description("Пол")]
+    public string Gender { get; set; } = string.Empty;
 
     /// <summary>
     /// Дата рождения
     /// </summary>
-    public required DateTime BirthDate { get; set; }
+    [JsonRequired]
+    [JsonPropertyOrder(2)]
+    [Description("Пол")]
+    public DateTime BirthDate { get; set; }
 
     /// <summary>
     /// Указывает статус ресурса: активен или нет.
     /// Активные ресурсы доступны для редактирования и для импорта связанных с ним ресурсов.
     /// При импорте сведений о пациенте возможно указывать в элементе `Patient.active` только значение `true`.
     /// </summary>
+    [JsonPropertyOrder(3)]
+    [Description("Статус ресурса")]
     public bool Active { get; set; } = true;
-
-    /// <summary>
-    /// Имя
-    /// </summary>
-    public HumanName? Name { get; set; }
 }
