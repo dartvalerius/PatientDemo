@@ -1,12 +1,7 @@
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Unicode;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-
 using PatientDemo.Application;
 using PatientDemo.Persistence;
 using PatientDemo.WebApi.Configurations.Localization;
@@ -15,6 +10,11 @@ using PatientDemo.WebApi.Mappings;
 using PatientDemo.WebApi.Middleware;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using Microsoft.EntityFrameworkCore;
+using PatientDemo.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +58,13 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<PatientDemoDbContext>();
+
+    await dbContext.Database.MigrateAsync();
+}
+
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseRequestLocalization();
@@ -65,7 +72,7 @@ app.UseRequestLocalization();
 app.UseStaticFiles();
 
 app.UseCors(corsPolicy => corsPolicy
-    .WithOrigins("https://localhost:7077", "http://localhost:5036")
+    .AllowAnyOrigin() 
     .AllowAnyMethod()
     .AllowAnyHeader());
 

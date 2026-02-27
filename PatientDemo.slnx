@@ -12,8 +12,8 @@
     <Project Path="PatientDemo.ConsoleApp/PatientDemo.ConsoleApp.csproj" Id="6807ea8d-8374-4e86-919e-73b70be5bed6" />
     <Project Path="PatientDemo.WebApi/PatientDemo.WebApi.csproj" Id="457c97d7-3e33-4770-a194-d1b37ba7dc6b" />
   </Folder>
-  <Folder Name="/Элементы решения/">
-    <File Path="docker-compose.yml" />
-    <File Path="DockerFile.txt" />
-  </Folder>
+  <Folder Name="/Элементы решения/" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>

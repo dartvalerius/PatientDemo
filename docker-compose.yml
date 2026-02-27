@@ -1,63 +1,68 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: postgres_db
+    container_name: PatientDemo_postgres
     environment:
-      POSTGRES_DB: postgresdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     networks:
-      - app_network
+      - PatientDemo_network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  api:
+  patientdemo.webapi:
+    image: ${DOCKER_REGISTRY-}patientdemowebapi
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: dotnet_api
+      dockerfile: PatientDemo.WebApi/Dockerfile
+    container_name: PatientDemo_webapi
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=postgresdb;Username=postgres;Password=postgres
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:80
     ports:
-      - "5000:80"
-      - "5001:443"
+      - "5255:80"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
-      - app_network
+      - PatientDemo_network
+    restart: unless-stopped
     volumes:
-      - ./src/PatientDemo.WebApi:/app
+      - ./logs/webapi:/app/logs
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
+  patientdemo.consoleapp:
+    image: ${DOCKER_REGISTRY-}patientdemoconsoleapp
+    build:
+      context: .
+      dockerfile: PatientDemo.ConsoleApp/Dockerfile
+    container_name: PatientDemo_console
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
-      - app_network
+      - PatientDemo_network
+    restart: no
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - ./logs/consoleapp:/app/logs
+
+networks:
+  PatientDemo_network:
+    driver: bridge
+    name: PatientDemo_network
 
 volumes:
   postgres_data:
+    name: PatientDemo_postgres_data
   pgadmin_data:
+    name: PatientDemo_pgadmin_data
 
-networks:
-  app_network:
-    driver: bridge

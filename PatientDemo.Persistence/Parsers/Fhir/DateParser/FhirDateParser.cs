@@ -8,8 +8,8 @@ namespace PatientDemo.Persistence.Parsers.Fhir.DateParser;
 
 public class FhirDateParser : IFhirDateParser
 {
-    private readonly Regex PrefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap)");
-    private readonly string[] DateFormats =
+    private readonly Regex _prefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap)");
+    private readonly string[] _dateFormats =
     [
         "yyyy-MM-ddTHH:mm:ssZ",
         "yyyy-MM-ddTHH:mm:ss.fffZ",
@@ -20,7 +20,7 @@ public class FhirDateParser : IFhirDateParser
         "yyyy"
     ];
 
-    public (DateTime DateFrom, DateTime DateTo) GetPeriod(string[] dateParams)
+    public (DateTime DateFrom, DateTime DateTo) GetPeriod(string[]? dateParams)
     {
         if (dateParams == null || dateParams.Length == 0)
             return (DateTime.MinValue, DateTime.MaxValue);
@@ -85,7 +85,7 @@ public class FhirDateParser : IFhirDateParser
         var originalInput = input;
 
         // 1. Извлекаем префикс
-        var prefixMatch = PrefixRegex.Match(input);
+        var prefixMatch = _prefixRegex.Match(input);
         if (prefixMatch.Success)
         {
             result.Prefix = prefixMatch.Value;
@@ -97,7 +97,7 @@ public class FhirDateParser : IFhirDateParser
         }
 
         // 2. Пробуем распарсить дату во всех возможных форматах
-        foreach (var format in DateFormats)
+        foreach (var format in _dateFormats)
         {
             if (DateTime.TryParseExact(input, format,
                     CultureInfo.InvariantCulture,
