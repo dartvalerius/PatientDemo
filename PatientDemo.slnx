@@ -9,6 +9,7 @@
     <Project Path="PatientDemo.Persistence/PatientDemo.Persistence.csproj" Id="73ac36e4-9f34-44bd-a4ac-143cce926b6b" />
   </Folder>
   <Folder Name="/src/Presentation/">
+    <Project Path="PatientDemo.ConsoleApp/PatientDemo.ConsoleApp.csproj" Id="6807ea8d-8374-4e86-919e-73b70be5bed6" />
     <Project Path="PatientDemo.WebApi/PatientDemo.WebApi.csproj" Id="457c97d7-3e33-4770-a194-d1b37ba7dc6b" />
   </Folder>
   <Folder Name="/Элементы решения/">
