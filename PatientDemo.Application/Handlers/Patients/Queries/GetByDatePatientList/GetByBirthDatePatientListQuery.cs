@@ -12,10 +12,10 @@ public class GetByBirthDatePatientListQuery : IRequest<IEnumerable<PatientVm>>
     /// <summary>
     /// Дата рождения с
     /// </summary>
-    public DateTime DateFrom { get; set; }
+    public DateTime? DateFrom { get; set; }
 
     /// <summary>
     /// Дата рождения по
     /// </summary>
-    public DateTime DateTo { get; set; }
+    public DateTime? DateTo { get; set; }
 }

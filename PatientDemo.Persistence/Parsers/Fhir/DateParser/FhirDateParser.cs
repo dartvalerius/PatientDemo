@@ -40,6 +40,7 @@ public class FhirDateParser : IFhirDateParser
                 {
                     if (!maxMinStart.HasValue || param.FromDate > maxMinStart)
                         maxMinStart = param.FromDate;
+
                     break;
                 }
                 // Для верхних границ (le, lt, eb) берем минимальную
@@ -47,6 +48,7 @@ public class FhirDateParser : IFhirDateParser
                 {
                     if (!minMaxEnd.HasValue || param.ToDate < minMaxEnd)
                         minMaxEnd = param.ToDate;
+
                     break;
                 }
                 // Для eq и ap учитываем обе границы
@@ -66,6 +68,9 @@ public class FhirDateParser : IFhirDateParser
                     break;
                 }
             }
+
+            minMaxEnd ??= DateTime.MaxValue;
+            maxMinStart ??= DateTime.MinValue;
         }
 
         return (maxMinStart!.Value, minMaxEnd!.Value);
