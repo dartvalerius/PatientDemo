@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "b2ca1f14-e205-4142-9ddb-37175fa7ffc8",
+    "name": "PatientDemo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23246681"
+  },
+  "item": [
+    {
+      "name": "Создать пациента",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"family\": \"Иванов\",\r\n  \"firstName\": \"Иван\",\r\n  \"middleName\": \"Иванович\",\r\n  \"birthDate\": \"2013-01-14T00:00\",\r\n  \"gender\": \"Male\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/Patients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Удалить пациента",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": \"e8dd90f7-31b6-4b17-a717-fdb42daf0d82\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/Patients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Изменить пациента",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": \"e7763aff-3b6e-443c-9178-1cf9c0c9427e\",\r\n    \"family\": \"Иванов\",\r\n    \"firstName\": \"Иван\",\r\n    \"middleName\": \"Иванович\",\r\n    \"birthDate\": \"2013-01-14T00:00\",\r\n    \"gender\": \"Male\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/Patients",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить по идентификатору",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": \"e7763aff-3b6e-443c-9178-1cf9c0c9427e\",\r\n    \"family\": \"Иванов\",\r\n    \"firstName\": \"Иван\",\r\n    \"middleName\": \"Иванович\",\r\n    \"birthDate\": \"2013-01-14T00:00\",\r\n    \"gender\": \"Male\"\r\n}\r\n"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/Patients/:id",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "e7763aff-3b6e-443c-9178-1cf9c0c9427e"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить по дате V1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/Patients/filter?date=eq2013-01-14",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients",
+            "filter"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "eq2013-01-14",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить по дате V2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/Patients/filter?date=ne2013-01-14",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients",
+            "filter"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "ne2013-01-14"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Получить по дате V3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/Patients/filter?date=lt2013-01-14T10:00",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "Patients",
+            "filter"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "lt2013-01-14T10:00"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}
