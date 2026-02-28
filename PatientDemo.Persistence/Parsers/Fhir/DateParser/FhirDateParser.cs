@@ -8,7 +8,7 @@ namespace PatientDemo.Persistence.Parsers.Fhir.DateParser;
 
 public class FhirDateParser : IFhirDateParser
 {
-    private readonly Regex _prefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap)");
+    private readonly Regex _prefixRegex = new("^(eq|gt|lt|ge|le|sa|eb|ap|ne)");
     private readonly string[] _dateFormats =
     [
         "yyyy-MM-ddTHH:mm:ssZ",
@@ -20,10 +20,10 @@ public class FhirDateParser : IFhirDateParser
         "yyyy"
     ];
 
-    public (DateTime DateFrom, DateTime DateTo) GetPeriod(string[]? dateParams)
+    public (DateTime DateFrom, DateTime DateTo, bool IsIgnore) GetPeriod(string[]? dateParams)
     {
         if (dateParams == null || dateParams.Length == 0)
-            return (DateTime.MinValue, DateTime.MaxValue);
+            return (DateTime.MinValue, DateTime.MaxValue, false);
 
         var parameters = dateParams.Select(ParseSingle).ToList();
 
@@ -67,13 +67,15 @@ public class FhirDateParser : IFhirDateParser
 
                     break;
                 }
+                case "ne":
+                    return (param.FromDate!.Value, param.ToDate!.Value, true);
             }
 
             minMaxEnd ??= DateTime.MaxValue;
             maxMinStart ??= DateTime.MinValue;
         }
 
-        return (maxMinStart!.Value, minMaxEnd!.Value);
+        return (maxMinStart!.Value, minMaxEnd!.Value, false);
     }
 
     /// <summary>
@@ -179,7 +181,7 @@ public class FhirDateParser : IFhirDateParser
                     param.ToDate = param.ToDate.Value.AddDays(1);
                 break;
 
-                // eq оставляем как есть
+                // eq и ne оставляем как есть
         }
     }
 }

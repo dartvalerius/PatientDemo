@@ -5,7 +5,7 @@
 /// </summary>
 class FhirDateParameter
 {
-    public string? Prefix { get; set; } // eq, gt, lt, ge, le, sa, eb, ap
+    public string? Prefix { get; set; } // eq, gt, lt, ge, le, sa, eb, ap, ne
     public DateTime? FromDate { get; set; } // Нижняя граница
     public DateTime? ToDate { get; set; }   // Верхняя граница
 }

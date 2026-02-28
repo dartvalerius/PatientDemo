@@ -16,11 +16,9 @@ public class GetByBirthDatePatientListQueryHandler(IPatientDemoDbContext dbConte
     {
         var query = dbContext.Patients.Include(x => x.Name).AsQueryable();
 
-        if (request.DateFrom.HasValue)
-            query = query.Where(x => x.BirthDate >= request.DateFrom);
-
-        if (request.DateTo.HasValue)
-            query = query.Where(x => x.BirthDate <= request.DateTo);
+        query = request.IsIgnore
+            ? query.Where(x => x.BirthDate < request.DateFrom || x.BirthDate > request.DateTo)
+            : query.Where(x => x.BirthDate >= request.DateFrom && x.BirthDate <= request.DateTo);
 
         return await query
             .ProjectTo<PatientVm>(mapper.ConfigurationProvider)

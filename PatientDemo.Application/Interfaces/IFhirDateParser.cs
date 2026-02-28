@@ -10,5 +10,5 @@ public interface IFhirDateParser
     /// </summary>
     /// <param name="dateParams">Массив параметров даты</param>
     /// <returns>Кортеж с датами периода</returns>
-    (DateTime DateFrom, DateTime DateTo) GetPeriod(string[] dateParams);
+    (DateTime DateFrom, DateTime DateTo, bool IsIgnore) GetPeriod(string[] dateParams);
 }

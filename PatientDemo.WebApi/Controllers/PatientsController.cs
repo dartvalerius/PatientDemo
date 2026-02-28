@@ -128,6 +128,7 @@ public class PatientsController(
 
             query.DateFrom = parsingResult.DateFrom;
             query.DateTo = parsingResult.DateTo;
+            query.IsIgnore = parsingResult.IsIgnore;
         }
 
         var patients = await mediator.Send(query, HttpContext.RequestAborted);
