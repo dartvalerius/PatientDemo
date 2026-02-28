@@ -223,7 +223,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": ""
+      "value": "http://localhost:5255"
     }
   ]
 }
