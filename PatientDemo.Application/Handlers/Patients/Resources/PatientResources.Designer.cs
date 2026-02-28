@@ -61,6 +61,60 @@ namespace PatientDemo.Application.Handlers.Patients.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Date of birth must be less than or equal to the current date..
+        /// </summary>
+        internal static string BirthDate_LessThanOrEqualToNow {
+            get {
+                return ResourceManager.GetString("BirthDate_LessThanOrEqualToNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Date of birth not specified..
+        /// </summary>
+        internal static string BirthDate_NotEmpty {
+            get {
+                return ResourceManager.GetString("BirthDate_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The family string must not be empty..
+        /// </summary>
+        internal static string Family_NotEmpty {
+            get {
+                return ResourceManager.GetString("Family_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The name string must not be empty..
+        /// </summary>
+        internal static string FirstName_NotEmpty {
+            get {
+                return ResourceManager.GetString("FirstName_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Incorrect patient gender value..
+        /// </summary>
+        internal static string Gender_IncorrectValue {
+            get {
+                return ResourceManager.GetString("Gender_IncorrectValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Patient ID must not be empty..
+        /// </summary>
+        internal static string Id_NotEmpty {
+            get {
+                return ResourceManager.GetString("Id_NotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Patient not found..
         /// </summary>
         internal static string NotFound {
